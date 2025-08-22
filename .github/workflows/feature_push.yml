@@ -3,19 +3,34 @@ on:
   push:
     branches:
       - feature/*
-      - main
+      # - main
 
 jobs:
-  update_branch:
+  pull-and-pr:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main  # Replace with the branch you want to merge into
+          head: ${{ github.ref_name }}  # The branch that triggered the workflow
+          title: "Automated PR from GitHub Action"
+          body: "This PR was created automatically."
+          reviewers: kchrisj,user2  # Replace with GitHub usernames
 
       - name: Debug
         run: |
-          echo ${{ github.event_name }}
           echo "event name is:" ${{ github.event_name }}
-          echo ${{ github.ref }}
-          echo ${{ github.event.pull_request.head.ref }}
-          echo ${{ github.event.pull_request.base.ref }}
+          echo "Pushed by" ${{ github.actor }} "to" ${{ github.ref }}
+          # echo ${{ github.event.pull_request.head.ref }}
+          # echo ${{ github.event.pull_request.base.ref }}  # Not available for push events

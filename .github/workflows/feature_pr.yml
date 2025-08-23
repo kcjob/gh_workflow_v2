@@ -1,0 +1,28 @@
+name: feature push
+on:
+  push:
+    branches:
+      - feature/*
+      - main
+
+jobs:
+  pull-and-pr:
+    runs-on: ubuntu-latest
+
+    env:
+      PULL_REQUEST_REVIEWERS: 'kcjob, chriskjob'
+
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: write
+  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Debug
+        run: |
+          echo "event name is:" ${{ github.event_name }}
+          echo "Pushed by" ${{ github.actor }} "to" ${{ github.ref }}
+

@@ -19,18 +19,18 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main  # Replace with the branch you want to merge into
+          base: main  # 'main' is the default target branch for PRs; replace if needed
           # head: ${{ github.ref_name }}  # The branch that triggered the workflow
           title: "Automated PR from GitHub Action"
           body: "This PR was created automatically."
-          reviewers: kchrisj,user2  # Replace with GitHub usernames
+          reviewers: kchrisj  # Replace with GitHub usernames
 
       - name: Debug
         run: |
           echo "event name is:" ${{ github.event_name }}
           echo "Pushed by" ${{ github.actor }} "to" ${{ github.ref }}
-          # echo ${{ github.event.pull_request.head.ref }}
+          # echo ${{ github.event.pull_request.head.ref }}  # Not available for push events
           # echo ${{ github.event.pull_request.base.ref }}  # Not available for push events

@@ -32,5 +32,3 @@ jobs:
         run: |
           echo "event name is:" ${{ github.event_name }}
           echo "Pushed by" ${{ github.actor }} "to" ${{ github.ref }}
-          # echo ${{ github.event.pull_request.head.ref }}  # Not available for push events
-          # echo ${{ github.event.pull_request.base.ref }}  # Not available for push events

@@ -23,7 +23,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main  # Replace with the branch you want to merge into
-          head: ${{ github.ref_name }}  # The branch that triggered the workflow
+          # head: ${{ github.ref_name }}  # The branch that triggered the workflow
           title: "Automated PR from GitHub Action"
           body: "This PR was created automatically."
           reviewers: kchrisj,user2  # Replace with GitHub usernames

@@ -9,6 +9,9 @@ jobs:
   pull-and-pr:
     runs-on: ubuntu-latest
 
+    env:
+      PULL_REQUEST_REVIEWERS: 'kcjob, chriskjob'
+
     permissions:
       contents: write
       actions: read
@@ -23,15 +26,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main  # 'main' is the default target branch for PRs; replace if needed
-          # head: ${{ github.ref_name }}  # The branch that triggered the workflow
-          title: "Automated PR from GitHub Action"
-          body: "This PR was created automatically."
-          reviewers: kchrisj  # Replace with GitHub usernames
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v7
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     base: main  # 'main' is the default target branch for PRs; replace if needed
+      #     body: "This PR was created automatically."
+      #     assignees: kcjob
+      #     reviewers: ${{ env.PULL_REQUEST_REVIEWERS }}
+      #     signoff: false
+      #     sign-commits: false
+
 
       - name: Debug
         run: |

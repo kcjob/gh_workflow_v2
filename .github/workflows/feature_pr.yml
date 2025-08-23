@@ -1,4 +1,4 @@
-name: feature push
+name: Just pushing
 on:
   push:
     branches:

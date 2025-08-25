@@ -35,8 +35,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Auto-created PR from ${{ github.ref_name }}"
           title: "Auto PR: ${{ github.ref_name }}"
-          base: main  # 'main' is the default target branch for PRs; replace if needed
-          branch: ${{ github.ref_name }}
+          base: ${{ github.ref_name }}  # 'main' is the default target branch for PRs; replace if needed
+          branch: main
           body: "This PR was created automatically."
           assignees: kcjob
           reviewers: ${{ env.PULL_REQUEST_REVIEWERS }}

@@ -34,7 +34,7 @@ jobs:
           commit-message: "Pull Report from ${{ github.ref_name }}"
           title: "Pull Repo: ${{ github.ref_name }}"
           base: main 
-          branch: ${{ github.ref_name }}  # 'main' is the default target branch for PRs; replace if needed
+          # branch: ${{ github.ref_name }}  # 'main' is the default target branch for PRs; replace if needed
           body: "This PR was created automatically."
           assignees: kcjob
           reviewers: ${{ env.PULL_REQUEST_REVIEWERS }}

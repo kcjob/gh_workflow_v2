@@ -49,4 +49,4 @@ jobs:
           echo "All Done"
           echo "event name is:" ${{ github.event_name }}
           echo "Pushed by" ${{ github.actor }} "to" ${{ github.ref }}
-          echo "Base branch: " ${{ github.base_ref }} 
+          echo "Base branch: " ${{ github.base_ref_name }}

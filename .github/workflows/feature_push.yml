@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PULL_REQUEST_REVIEWERS: 'chriskjob'
+      PULL_REQUEST_REVIEWERS: 'chriskjob, kcjob'
 
     permissions:
       contents: write
@@ -22,21 +22,19 @@ jobs:
         with:
           fetch-depth: 0  # Required for proper branch comparison
 
-
-
-#       - name: Set up Git
-#         run: |
-#           git config user.name "github-actions[bot]"
-#           git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Auto-created PR from ${{ github.ref_name }}"
-          title: "Auto PR: ${{ github.ref_name }}"
-          base: ${{ github.ref_name }}  # 'main' is the default target branch for PRs; replace if needed
-          branch: main
+          commit-message: "Pull Report from ${{ github.ref_name }}"
+          title: "Pull Repo: ${{ github.ref_name }}"
+          base: main 
+          # branch: ${{ github.ref_name }}  # 'main' is the default target branch for PRs; replace if needed
           body: "This PR was created automatically."
           assignees: kcjob
           reviewers: ${{ env.PULL_REQUEST_REVIEWERS }}

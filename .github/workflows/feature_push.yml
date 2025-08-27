@@ -13,7 +13,8 @@ jobs:
 
     permissions:
       contents: write
-      actions: read
+      actions: write
+      issues: write 
       pull-requests: write
   
     steps:
@@ -29,8 +30,8 @@ jobs:
           secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: ${{ env.PULL_REQUEST_REVIEWERS }}
           minimum-approvals: 1
-          issue-title: "Approve PR to main"
-          issue-body: "Please approve or deny this pull request."
+          # issue-title: "Approve PR to main"
+          # issue-body: "Please approve or deny this pull request."
 
 
       - name: Debug

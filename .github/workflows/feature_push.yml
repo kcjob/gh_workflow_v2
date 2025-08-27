@@ -22,24 +22,15 @@ jobs:
         with:
           fetch-depth: 0  # Required for proper branch comparison
 
-      - name: Set up Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: trstringer/manual-approval@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Pull Report from ${{ github.ref_name }}"
-          title: "Pull Repo: ${{ github.ref_name }}"
-          base: main 
-          # branch: ${{ github.ref_name }}  # 'main' is the default target branch for PRs; replace if needed
-          body: "This PR was created automatically."
-          assignees: kcjob
-          reviewers: ${{ env.PULL_REQUEST_REVIEWERS }}
-          signoff: false
-          sign-commits: false
+          secret: ${{ secrets.GITHUB_TOKEN }}
+          approvers: ${{ env.PULL_REQUEST_REVIEWERS }}
+          minimum-approvals: 1
+          issue-title: "Approve PR to main"
+          issue-body: "Please approve or deny this pull request."
 
 
       - name: Debug
@@ -48,3 +39,5 @@ jobs:
           echo "event name is:" ${{ github.event_name }}
           echo "Pushed by" ${{ github.actor }} "to" ${{ github.ref }}
           echo "Base branch: " ${{ github.base_ref }}
+          echo "URL ${{ github.api_url }}"
+          echo "Repository ${{ github.repository }}"
